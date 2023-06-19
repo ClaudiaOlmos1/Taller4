@@ -1,0 +1,66 @@
+@startuml
+' left to right direction
+' hide empty members
+skin rose
+
+package colecciones {
+
+
+interface Sistema <<interface>> {
+
+        }
+SistemaImpl ..> Sistema: <<uses>>
+
+interface Lista <<interface>> {
+            +
+        }
+Lista ---|> SistemaImpl: <<extends>>
+
+
+class NodoDoble {
+            + NodoDoble()
+            + getSiguiente(): NodoDoble
+            + setSiguiente(siguiente: NodoDoble): void
+            + getAnterior(): NodoDoble
+            + setAnterior(anterior: NodoDoble): void
+        }
+NodoDoble *--> "1" SistemaImpl: - elemento: Elemento
+        NodoDoble o--> "0..1" NodoDoble: - siguiente: Nodo
+        NodoDoble o--> "0..1" NodoDoble: - anterior: Nodo
+
+class ListaNexoDoble {
+            + ListaNexoDoble()
+        }
+        ListaNexoDoble *--> "0..1" NodoDoble: - cabeza: Nodo
+        ListaNexoDoble *--> "0..1" NodoDoble: - cola: Nodo
+        ListaNexoDoble ..|> Lista: <<implements>>
+
+    }
+
+package model {
+
+class Pokemon {
+        -id:String
+        -nombre:String
+        -etapa:String
+        -evolucion1:String
+        -evolucion2:String
+        -evolucion3:String
+        -String:tipo1;
+        -String:tipo2;
+        +Pokemon(id:String, nombre:String, etapa:String, evolucion1:String, evolucion2:String, evolucion3:String, tipo1:String, tipo2:String)
+        +getId();
+        +getNombre();
+        +getEtapa();
+        +getEvolucion1();
+        +getEvolucion2();
+        +getEvolucion3();
+        +getTipo1();
+        +getTipo2();
+        }
+Pokemon ..|> Sistema: <<implements>>
+
+}
+
+@enduml
+
